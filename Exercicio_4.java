@@ -19,9 +19,28 @@ public class Exercicio_4 {
         return result;
     }
 
+    public static int fibonacciIterativo(int n) {
+        if (n <= 0)
+            return 0;
+        if (n == 1)
+            return 1;
+    
+        int a = 0, b = 1, resultado = 0;
+        for (int i = 2; i <= n; ++i) {
+            resultado = a + b;
+            a = b;
+            b = resultado;
+        }
+        return resultado;
+    }
+
     public static void main(String[] args) {
         System.out.println("Fibonacci(5): " + fibonacci(5)); // Deve imprimir 5
         System.out.println("Fibonacci(10): " + fibonacci(10)); // Deve imprimir 55
         System.out.println("Fibonacci(20): " + fibonacci(20)); // Deve imprimir 6765
+        System.out.println();
+        System.out.println("Fibonacci(5): " + fibonacciIterativo(5)); // Deve imprimir 5
+        System.out.println("Fibonacci(10): " + fibonacciIterativo(10)); // Deve imprimir 55
+        System.out.println("Fibonacci(20): " + fibonacciIterativo(20)); // Deve imprimir 6765
     }
 }
