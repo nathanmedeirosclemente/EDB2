@@ -73,7 +73,8 @@ public class ArvoreBinariaDeBusca {
     public Produto buscarProduto(int codigo) {
         No no = buscarRecursivo(raiz, codigo);
         if (no != null) {
-            System.out.println();
+            System.out.println("Produto encontrado: " + no.getProduto().getNome() + ", Quantidade: "
+                    + no.getProduto().getQuantidade() + "\n");
             return no.getProduto();
         } else {
             System.out.println("Produto não encontrado");
@@ -95,12 +96,28 @@ public class ArvoreBinariaDeBusca {
 
     // Método para remover um produto pelo código
     public void removerProduto(int codigo) {
+        int raizDoCodigoOriginal = -1;
+        if (raiz != null) {
+            raizDoCodigoOriginal = raiz.getProduto().getCodigo();
+        }
+        
         raiz = removerRecursivo(raiz, codigo);
+        
+        // Verifica se a raiz não mudou e se o produto não foi encontrado
+        int novaRaizDoCodigo = -1;
+        if (raiz != null) {
+            novaRaizDoCodigo = raiz.getProduto().getCodigo();
+        }
+        
+        if (raizDoCodigoOriginal == novaRaizDoCodigo) {
+            System.out.println("Produto " + codigo + " não encontrado.");
+        }
     }
 
     private No removerRecursivo(No raiz, int codigo) {
-        if (raiz == null)
-            return raiz;
+        if (raiz == null) {
+            return null;  // Produto não encontrado
+        }
 
         if (codigo < raiz.getProduto().getCodigo()) {
             raiz.setEsquerda(removerRecursivo(raiz.getEsquerda(), codigo));
@@ -108,14 +125,17 @@ public class ArvoreBinariaDeBusca {
             raiz.setDireita(removerRecursivo(raiz.getDireita(), codigo));
         } else {
             // No encontrado
-            if (raiz.getEsquerda() == null)
+            if (raiz.getEsquerda() == null){
                 return raiz.getDireita();
-            if (raiz.getDireita() == null)
+            }
+                
+            if (raiz.getDireita() == null){
                 return raiz.getEsquerda();
+            }                
 
             No menorNo = menorCodigoNo(raiz.getDireita());
             raiz.setProduto(menorNo.getProduto());
-            raiz.setDireita(removerRecursivo(raiz.getDireita(), raiz.getProduto().getCodigo()));
+            raiz.setDireita(removerRecursivo(raiz.getDireita(), menorNo.getProduto().getCodigo()));
         }
 
         return raiz;
