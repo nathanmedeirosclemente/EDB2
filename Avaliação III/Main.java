@@ -1,6 +1,8 @@
 public class Main {
-    public static void Main(String[] args) {
-        
+    public static void main(String[] args) {
+
+        ArvoreBalanceada sistema = new ArvoreBalanceada();
+
         // Insercoes
         sistema.inserirReserva(new Reserva(1001, "Alice Silva", "V001", "2024-08-20T15:30:00"));
         sistema.inserirReserva(new Reserva(1002, "Joao Pereira", "V001", "2024-08-20T14:00:00"));
@@ -14,9 +16,9 @@ public class Main {
         sistema.inserirReserva(new Reserva(1010, "Andre Mateus", "V001", "2024-08-20T16:00:00"));
 
         // Remocoes
-        sistema.removerReserva(9);
-        sistema.removerReserva(10);
-        sistema.removerReserva(4);
+        sistema.removerReserva(1009);
+        sistema.removerReserva(1010);
+        sistema.removerReserva(1004);
 
         // Impressao em pre-ordem
         sistema.imprimirEmPreOrdem();
